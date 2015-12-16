@@ -36,6 +36,92 @@ var albumMarconi = {
         {name: 'Last Song', length: '6:15'}
     ]
 };
+// ALBUM http://www.allmusic.com/album/the-buffet-mw0002896346
+var mw0002896346 = {
+    name: 'The Buffet',
+    artist: 'R. Kelly',
+    label: 'RCA',
+    year: '2015',
+    albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/984/MI0003984115.jpg?partner=allrovi.com',
+    songs: [
+        {name: 'The Poem', length: '1:19'},
+        {name: 'Poetic Sex', length: '4:21'},
+        {name: 'Anything Goes', length: '4:35'},
+        {name: "Let's Make Some Noise", length: '4:14'},
+        {name: 'Marching Band', length: '3:56'},
+        {name: 'Switch Up', length: '3:24'},
+        {name: 'Wanna Be There', length: '4:15'},
+        {name: 'All My Fault', length: '3:25'},
+        {name: 'Wake Up Everybody', length: '3:41'},
+        {name: 'Backyard Party', length: '3:32'},
+        {name: 'Sextime', length: '4:14'},
+        {name: "Let's Be Real Now", length: '3:05'}
+    ]
+};
 
+// ALBUM http://www.allmusic.com/album/the-moving-sidewalk-mw0002083060
+var mw0002083060 = {
+    name: 'The Moving Sidewalk',
+    artist: 'Alan Hampton',
+    label: 'RCA',
+    year: '2011',
+    albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/125/MI0003125428.jpg?partner=allrovi.com',
+    songs: [
+        {name: 'Staring at the Sun', length: '4:09'},
+        {name: 'Change Your Mind', length: '2:47'},
+        {name: 'Home to You', length: '2:44'},
+        {name: "Loud and Clear", length: '3:27'},
+        {name: 'Kaleidscope', length: '2:51'},
+        {name: 'Where Did You Go?', length: '4:01'},
+        {name: 'Oh My God', length: '3:10'},
+        {name: 'Undercover', length: '2:31'},
+        {name: "There's This Side", length: '3:43'},
+        {name: 'Travel', length: '3:01'}
+    ]
+};
 
-var fixtures = [albumPicasso, albumMarconi];
+// ALBUM http://www.allmusic.com/album/death-of-a-bachelor-mw0002891900
+var mw0002891900 = {
+    name: 'Death of a Bachelor',
+    artist: 'Panic! At the Disco',
+    label: 'RCA',
+    year: '2000',
+    albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/955/MI0003955172.jpg?partner=allrovi.com',
+    songs: [
+        {name: 'Victorious', length: '4:09'},
+        {name: "Don't Threaten Me with a Good Time", length: '2:47'},
+        {name: 'Hallelujah', length: '2:44'},
+        {name: "Emperor's New Clothes", length: '3:27'},
+        {name: 'Death of a Bachelor', length: '2:51'},
+        {name: 'Crazy=Genius', length: '4:01'},
+        {name: 'LA Devotee', length: '3:10'},
+        {name: 'Golden Days', length: '2:31'},
+        {name: "The Good, the Bad and the Dirty", length: '3:43'},
+        {name: 'House of Memories', length: '3:01'},
+        {name: 'Impossible Year', length: '3:01'}
+    ]
+};
+
+// ALBUM http://www.allmusic.com/album/untamed-mw0002896652
+var mw0002896652 = {
+    name: 'Untamed',
+    artist: 'Cam / Camaron Ochs',
+    label: 'RCA',
+    year: '2015',
+    albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/979/MI0003979990.jpg?partner=allrovi.com',
+    songs: [
+        {name: 'Untamed', length: '3:30'},
+        {name: "Hungover on Heartache", length: '3:13'},
+        {name: 'Mayday', length: '3:36'},
+        {name: "Burning House", length: '3:51'},
+        {name: 'Cold in California', length: '3:10'},
+        {name: 'My Mistake', length: '3:20'},
+        {name: 'Runaway Train', length: '2:57'},
+        {name: 'Half Broke Heart', length: '3:04'},
+        {name: "Want It All", length: '3:09'},
+        {name: "Country Ain't Never Been Pretty", length: '3:39'},
+        {name: 'Village', length: '3:55'}
+    ]
+};
+
+var fixtures = [albumPicasso, albumMarconi, mw0002896346, mw0002891900, mw0002896652];
