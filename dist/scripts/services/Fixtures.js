@@ -121,15 +121,35 @@
                 {name: 'Village', length: '3:55'}
             ]
         };
-         
+
+
+
+
     Fixtures.getAlbum = function() {
          return albumPicasso;
      };
+         
+         
+         
+         
+//assignment6Services: Add a second public method to the Fixtures service named getCollection. This method takes one argument, numberOfAlbums, and returns an array with the specified number of albumPicasso objects pushed to it.
+         Fixtures.getCollection = function(numberOfAlbums) {
+            var albums = [];
+            for (var i=0; i < numberOfAlbums; i++) { 
+                albums.push(angular.copy(albumPicasso));
+            };
+            return albums;
+         };
+//angular.copy is one of several global function components on the angular object. We add an albums property and set its value to an empty array. Within the for loop, we use angular.copy to make copies of albumPicasso and push them to the array.
+                
+                
+                
+
          
          return Fixtures;
      }
  
      angular
          .module('blocJams')
-         .factory('Fixtures', Fixtures);
+         .factory('Fixtures', Fixtures); //register a Fixtures service using the Factory recipe
  })();

@@ -1,5 +1,4 @@
  (function() {
-     //function AlbumCtrl() {
      function AlbumCtrl(Fixtures) {
          //this.albumData = fixtures[0]; //my variation for assignment 5
          //this.albumData = albumPicasso; //assignment 5
@@ -9,6 +8,6 @@
  
      angular
          .module('blocJams')
-         //.controller('AlbumCtrl', AlbumCtrl);
-         .controller('AlbumCtrl', ['Fixtures', AlbumCtrl]); //lesson 6: We add Fixtures to AlbumCtrl's array of dependencies. Once injected, the service is available for use within the controller.
+         .controller('AlbumCtrl', ['Fixtures', AlbumCtrl]);
+//lesson 6: We add Fixtures service to AlbumCtrl's array of dependencies. Once injected, the service is available for use within the controller.
  })();
