@@ -9,13 +9,17 @@
          
          SongPlayer.play = function(song) { // click function for song button
              if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
-                 if (currentBuzzObject) { currentBuzzObject.stop(); } //if currently playing a song, stop song
+                 if (currentBuzzObject) { 
+                     currentBuzzObject.stop();
+                     currentSong.playing = null;
+                 } //if currently playing a song, stop song. change html attribute playing to null.
                  currentBuzzObject = new buzz.sound(song.audioUrl, {
                      formats: ['mp3'],
                      preload: true
                  }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
                  currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
                  currentBuzzObject.play();    //play current Buzz song
+                 currentSong.playing = true; //change html attribute playing to true so that pause button is shown
              } else if (currentSong === song) { //if click on currently playing song
                 if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
                 }
