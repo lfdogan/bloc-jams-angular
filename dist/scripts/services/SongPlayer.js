@@ -2,14 +2,22 @@
      function SongPlayer() {
          var SongPlayer = {};
          
-         
+         //two private attributes: currentSong and currentBuzzObject
          var currentSong = null;
+         /**
+         * @desc Buzz object audio file
+         * @type {Object}
+         */
          var currentBuzzObject = null;
          
-         
-         SongPlayer.play = function(song) { // click function for song play button
-             if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
-                 if (currentBuzzObject) { 
+         //one private function: setSong
+        /**
+         * @function setSong
+         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
+         * @param {Object} song
+         */
+         var setSong = function(song){
+             if (currentBuzzObject) { 
                      currentBuzzObject.stop();
                      currentSong.playing = null;
                  } //if currently playing a song, stop song. change html attribute playing to null.
@@ -18,18 +26,19 @@
                      preload: true
                  }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
                  currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
+         };
+         
+         //two public methods: SongPlayer.play and SongPlayer.pause
+         SongPlayer.play = function(song) { // click on song play button to play
+             if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
+                 setSong(song);
                  currentBuzzObject.play();    //play current Buzz song
                  currentSong.playing = true; //change html attribute playing to true so that pause button is shown
              } else if (currentSong === song) { //if click on currently playing song
                 if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
                 }  
-        };
-         
-         
-         
-         
-         
-         SongPlayer.pause = function(song) { // click function for song pause button
+         };
+         SongPlayer.pause = function(song) { // click on song pause button to pause
              currentBuzzObject.pause();
              song.playing = false; //set html attribute to false so that play button is shown
          };
