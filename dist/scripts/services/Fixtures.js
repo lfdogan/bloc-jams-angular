@@ -125,6 +125,7 @@
 
 
 
+
     Fixtures.getAlbum = function() {
          return albumPicasso;
      };
@@ -133,16 +134,21 @@
          
          
 //assignment6Services: Add a second public method to the Fixtures service named getCollection. This method takes one argument, numberOfAlbums, and returns an array with the specified number of albumPicasso objects pushed to it.
-         Fixtures.getCollection = function(numberOfAlbums) {
-            var albums = [];
-            for (var i=0; i < numberOfAlbums; i++) { 
-                albums.push(angular.copy(albumPicasso));
-            };
-            return albums;
-         };
+//         Fixtures.getCollection = function(numberOfAlbums) {
+//            var albums = [];
+//            for (var i=0; i < numberOfAlbums; i++) { 
+//                albums.push(angular.copy(albumPicasso));
+//            };
+//            return albums;
+//         };
 //angular.copy is one of several global function components on the angular object. We add an albums property and set its value to an empty array. Within the for loop, we use angular.copy to make copies of albumPicasso and push them to the array.
                 
-                
+//TRIAL after assignment 6
+         var allAlbums = [albumPicasso, albumMarconi, mw0002896346, mw0002083060, mw0002891900, mw0002896652];
+         Fixtures.getCollection = function() {
+             var albums = allAlbums;
+             return albums;
+         };
                 
 
          

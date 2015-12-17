@@ -1,6 +1,7 @@
  (function() {
      function CollectionCtrl(Fixtures) {
-         this.albums = Fixtures.getCollection(12);
+         //this.albums = Fixtures.getCollection(12); //assignment 6
+         this.albums = Fixtures.getCollection(); //my TRIAL after assignment 6
             }
  
      angular
