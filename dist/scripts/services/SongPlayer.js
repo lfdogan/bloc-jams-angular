@@ -3,12 +3,17 @@
          var SongPlayer = {};
          
          //two private attributes: currentSong and currentBuzzObject
-         var currentSong = null;
-         /**
+         /**currentSong
+         * @desc object element from album's song array
+         * @type {Object}
+         */
+         var currentSong = null; // null or song item from album.songs
+         /**currentBuzzObject
          * @desc Buzz object audio file
          * @type {Object}
          */
          var currentBuzzObject = null;
+         
          
          //one private function: setSong
         /**
@@ -27,17 +32,36 @@
                  }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
                  currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
          };
+         //assignment7: Write a private playSong function. This function should do two things: Play the current Buzz object: currentBuzzObject.play(); Set the playing property of the song object to true: song.playing = true; Replace all instances when these two lines of code are used together with the playSong function. Write documentation for the remaining undocumented attributes and functions of the SongPlayer service.
+          /**
+         * @function playSong
+         * @desc Play song and set html attribute "playing" to true
+         * @param {Object} song
+         */
+         var playSong = function(song){
+             currentBuzzObject.play();    //play current Buzz song
+             song.playing = true; //change html attribute playing to true so that pause button is shown
+         };
          
          //two public methods: SongPlayer.play and SongPlayer.pause
+          /**
+         * @function SongPlayer.play
+         * @desc play song
+         * @param {Object} song
+         */
          SongPlayer.play = function(song) { // click on song play button to play
              if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
                  setSong(song);
-                 currentBuzzObject.play();    //play current Buzz song
-                 currentSong.playing = true; //change html attribute playing to true so that pause button is shown
+                 playSong(song);
              } else if (currentSong === song) { //if click on currently playing song
                 if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
                 }  
          };
+          /**
+         * @function SongPlayer.pause
+         * @desc pause song
+         * @param {Object} song
+         */
          SongPlayer.pause = function(song) { // click on song pause button to pause
              currentBuzzObject.pause();
              song.playing = false; //set html attribute to false so that play button is shown
