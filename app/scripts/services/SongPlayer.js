@@ -7,7 +7,7 @@
          var currentBuzzObject = null;
          
          
-         SongPlayer.play = function(song) { // click function for song button
+         SongPlayer.play = function(song) { // click function for song play button
              if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
                  if (currentBuzzObject) { 
                      currentBuzzObject.stop();
@@ -22,12 +22,17 @@
                  currentSong.playing = true; //change html attribute playing to true so that pause button is shown
              } else if (currentSong === song) { //if click on currently playing song
                 if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
-                }
-
-
-             
-             
-     };
+                }  
+        };
+         
+         
+         
+         
+         
+         SongPlayer.pause = function(song) { // click function for song pause button
+             currentBuzzObject.pause();
+             song.playing = false; //set html attribute to false so that play button is shown
+         };
          
          
          
