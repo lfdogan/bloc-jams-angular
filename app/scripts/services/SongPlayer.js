@@ -3,13 +3,26 @@
          var SongPlayer = {};
          
          
-         SongPlayer.play = function(song) {
-             var currentBuzzObject = new buzz.sound(song.audioUrl, {
-                 formats: ['mp3'],
-                 preload: true
-             });
- 
-         currentBuzzObject.play();    
+         var currentSong = null;
+         var currentBuzzObject = null;
+         
+         
+         SongPlayer.play = function(song) { // click function for song button
+             if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
+                 if (currentBuzzObject) { currentBuzzObject.stop(); } //if currently playing a song, stop song
+                 currentBuzzObject = new buzz.sound(song.audioUrl, {
+                     formats: ['mp3'],
+                     preload: true
+                 }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
+                 currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
+                 currentBuzzObject.play();    //play current Buzz song
+             } else if (currentSong === song) { //if click on currently playing song
+                if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
+                }
+
+
+             
+             
      };
          
          
