@@ -2,17 +2,22 @@
      function SongPlayer() {
          var SongPlayer = {};
          
+         
+         
+         
          //two private attributes: currentSong and currentBuzzObject
          /**currentSong
          * @desc object element from album's song array
          * @type {Object}
          */
-         var currentSong = null; // null or song item from album.songs
+         //var currentSong = null; // null or song item from album.songs
          /**currentBuzzObject
          * @desc Buzz object audio file
          * @type {Object}
          */
          var currentBuzzObject = null;
+
+         
          
          
          //one private function: setSong
@@ -24,13 +29,13 @@
          var setSong = function(song){
              if (currentBuzzObject) { 
                      currentBuzzObject.stop();
-                     currentSong.playing = null;
+                     SongPlayer.currentSong.playing = null;
                  } //if currently playing a song, stop song. change html attribute playing to null.
                  currentBuzzObject = new buzz.sound(song.audioUrl, {
                      formats: ['mp3'],
                      preload: true
                  }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
-                 currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
+                 SongPlayer.currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
          };
          //assignment7: Write a private playSong function. This function should do two things: Play the current Buzz object: currentBuzzObject.play(); Set the playing property of the song object to true: song.playing = true; Replace all instances when these two lines of code are used together with the playSong function. Write documentation for the remaining undocumented attributes and functions of the SongPlayer service.
           /**
@@ -43,6 +48,16 @@
              song.playing = true; //change html attribute playing to true so that pause button is shown
          };
          
+   
+         
+         
+         
+         
+         //one public attribute: currentSong and currentBuzzObject
+         SongPlayer.currentSong = null;// null or song item from album.songs         
+         
+         
+         
          //two public methods: SongPlayer.play and SongPlayer.pause
           /**
          * @function SongPlayer.play
@@ -50,10 +65,10 @@
          * @param {Object} song
          */
          SongPlayer.play = function(song) { // click on song play button to play
-             if (currentSong !== song) { //no song or different song playing. does not PAUSE current song
+             if (SongPlayer.currentSong !== song) { //no song or different song playing. does not PAUSE current song
                  setSong(song);
                  playSong(song);
-             } else if (currentSong === song) { //if click on currently playing song
+             } else if (SongPlayer.currentSong === song) { //if click on currently playing song
                 if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
                 }  
          };
