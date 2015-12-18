@@ -65,6 +65,7 @@
          * @param {Object} song
          */
          SongPlayer.play = function(song) { // click on song play button to play
+             song = song || SongPlayer.currentSong; // assign value of either variable. It will assign song when play method (function) is accessed from song row. It will assign (public) currentSong when play method (function) is accessed from player-bar
              if (SongPlayer.currentSong !== song) { //no song or different song playing. does not PAUSE current song
                  setSong(song);
                  playSong(song);
@@ -78,6 +79,7 @@
          * @param {Object} song
          */
          SongPlayer.pause = function(song) { // click on song pause button to pause
+             song = song || SongPlayer.currentSong; 
              currentBuzzObject.pause();
              song.playing = false; //set html attribute to false so that play button is shown
          };
