@@ -1,11 +1,15 @@
  (function() {
-     function SongPlayer() {
+     function SongPlayer(Fixtures) {//Inject the Fixtures service into the SongPlayer service
          var SongPlayer = {};
          
          
          
-         
-         //two private attributes: currentSong and currentBuzzObject
+         //private attributes:
+         /**
+         * @desc stores album object
+         * @type {Object}
+         */
+         var currentAlbum = Fixtures.getAlbum(); //getAlbum method stores the album information
          /**currentSong
          * @desc object element from album's song array
          * @type {Object}
@@ -20,70 +24,105 @@
          
          
          
-         //one private function: setSong
+         //private functions
         /**
          * @function setSong
-         * @desc Stops currently playing song and loads new audio file as currentBuzzObject
+         * @desc if currently playing a song, stop song. change html attribute playing to null. set a Buzz sound object from albumPicasso.songs[song].audioUrl. assign the songs array element that was clicked on to the currentSong variable
          * @param {Object} song
          */
          var setSong = function(song){
              if (currentBuzzObject) { 
                      currentBuzzObject.stop();
                      SongPlayer.currentSong.playing = null;
-                 } //if currently playing a song, stop song. change html attribute playing to null.
+                 }
                  currentBuzzObject = new buzz.sound(song.audioUrl, {
                      formats: ['mp3'],
                      preload: true
-                 }); // set a Buzz sound object from albumPicasso.songs[song].audioUrl 
-                 SongPlayer.currentSong = song; //assign the songs array element that was clicked on to the currentSong variable
+                 });
+                 SongPlayer.currentSong = song;
          };
          //assignment7: Write a private playSong function. This function should do two things: Play the current Buzz object: currentBuzzObject.play(); Set the playing property of the song object to true: song.playing = true; Replace all instances when these two lines of code are used together with the playSong function. Write documentation for the remaining undocumented attributes and functions of the SongPlayer service.
           /**
          * @function playSong
-         * @desc Play song and set html attribute "playing" to true
+         * @desc play current Buzz song. change html attribute playing to true so that pause button is shown
          * @param {Object} song
          */
          var playSong = function(song){
-             currentBuzzObject.play();    //play current Buzz song
-             song.playing = true; //change html attribute playing to true so that pause button is shown
+             currentBuzzObject.play();
+             song.playing = true;
          };
-         
+         /**
+         * @function getSongIndex
+         * @desc get the array index of the song
+         * @param {Object} song
+         * @return {number} song
+         */
+         var getSongIndex = function(song) {
+             return currentAlbum.songs.indexOf(song);
+             };
    
          
          
          
          
-         //one public attribute: currentSong and currentBuzzObject
-         SongPlayer.currentSong = null;// null or song item from album.songs         
+         
+         
+         //public attributes
+         /**SongPlayer.currentSong
+         * @desc song object element from album's songs array or 'null'
+         * @type {Object}
+         */         
+         SongPlayer.currentSong = null;     
          
          
          
-         //two public methods: SongPlayer.play and SongPlayer.pause
+         
+         
+         
+         
+         //public methods
           /**
          * @function SongPlayer.play
-         * @desc play song
+         * @desc click on song play button to play, assign value of either variable. It will assign song when play method (function) is accessed from song row. It will assign (public) currentSong when play method (function) is accessed from player-bar. no song or different song playing. does not PAUSE current song. if click on currently playing song. if song is paused play the song
          * @param {Object} song
          */
-         SongPlayer.play = function(song) { // click on song play button to play
-             song = song || SongPlayer.currentSong; // assign value of either variable. It will assign song when play method (function) is accessed from song row. It will assign (public) currentSong when play method (function) is accessed from player-bar
-             if (SongPlayer.currentSong !== song) { //no song or different song playing. does not PAUSE current song
+         SongPlayer.play = function(song) { 
+             song = song || SongPlayer.currentSong;
+             if (SongPlayer.currentSong !== song) {
                  setSong(song);
                  playSong(song);
-             } else if (SongPlayer.currentSong === song) { //if click on currently playing song
-                if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); } //if song is paused play the song
+             } else if (SongPlayer.currentSong === song) {
+                if (currentBuzzObject.isPaused()) {   currentBuzzObject.play(); }
                 }  
          };
           /**
          * @function SongPlayer.pause
-         * @desc pause song
+         * @desc click on song pause button to pause, set html attribute to false so that play button is shown
          * @param {Object} song
          */
-         SongPlayer.pause = function(song) { // click on song pause button to pause
+         SongPlayer.pause = function(song) {
              song = song || SongPlayer.currentSong; 
              currentBuzzObject.pause();
-             song.playing = false; //set html attribute to false so that play button is shown
+             song.playing = false;
          };
-         
+          /**
+         * @function SongPlayer.previous
+         * @desc PLAYS THE PREVIOUS SONG ONLY IF THERE IS A LOWER TRACK NUMBER FROM CURRENT SONG!!!. get the index of the currently playing song and then decrease that index by one. If new number is negative then stop playing current song and set the current song to null. If the new number is not negative set "song" to new index number, run setSong and playSong functions on the new song number.
+         * @param none
+         */         
+          SongPlayer.previous = function() {
+              var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+              currentSongIndex--;
+              if (currentSongIndex < 0) {
+                  currentBuzzObject.stop();
+                  SongPlayer.currentSong.playing = null;
+              } else {
+                 var song = currentAlbum.songs[currentSongIndex];
+                 setSong(song);
+                 playSong(song);
+             }
+              
+         };
          
          
          
