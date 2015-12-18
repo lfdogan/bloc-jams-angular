@@ -15,7 +15,7 @@
                 {name: 'Green', length: 103.96, audioUrl: '/assets/music/bloc_jams_music/green' },
                 {name: 'Red', length: 268.45, audioUrl: '/assets/music/bloc_jams_music/red' },
                 {name: 'Pink', length: 153.14, audioUrl: '/assets/music/bloc_jams_music/pink' },
-                {name: 'Magenta', length: 374.22, audioUrl: 'a/ssets/music/bloc_jams_music/magenta' },
+                {name: 'Magenta', length: 374.22, audioUrl: '/assets/music/bloc_jams_music/magenta' },
             ]
         };
         // ALBUM 20
