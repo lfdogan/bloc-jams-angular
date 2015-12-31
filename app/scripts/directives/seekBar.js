@@ -66,6 +66,12 @@
                      return { width: percentString() };
                  };
                  
+                 //thumbStyle: Returns the location from the LEFT of the seek bar fill circle based 
+                 //        on the calculated percent of the location where user clicked on seek-bar div element
+                 scope.thumbStyle = function() {
+                     return { left: percentString() };
+                 };                 
+                 
                  
                  // onClickSeekBar function: When user clicks on the SEEK BAR div element:
                  //     run calculatePercent function: determine location between 0 and 1. Assign to "percent".
@@ -82,6 +88,9 @@
                  //     in value of scope.value as the user drags the seek bar thumb.
                  //     with Angular, $document must be injected as a dependency to use it so 
                  //     it needs to be added as a dependency to the this seekBar directive.
+                 //     the code scope.$apply(function() {...}); will move the bar and 
+                 //                 circle along with the mouse as it is dragged. Without this 
+                 //                 code the bar and circle will only move once mouse button released
                  scope.trackThumb = function() {
                       $document.bind('mousemove.thumb', function(event) {
                           var percent = calculatePercent(seekBar, event);
