@@ -99,9 +99,9 @@
      right: 0;
      top: 0.5rem;
  }
- .seek-bar {/*rounded rectangle */
+ .seek-bar {/* background status bar */
      height: 0.25rem;
-     background: rgba(255, 255, 255, 0.3);/*transparent?*/
+     background: rgba(255, 255, 255, 0.3);/*30% transparent white*/
      border-radius: 2px;
      position: relative;
      cursor: pointer;
