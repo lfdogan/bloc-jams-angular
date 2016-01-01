@@ -2,7 +2,7 @@
      function SongPlayer($rootScope, Fixtures) {//Inject the Fixtures service into the SongPlayer service. Because $rootScope is a service, we must inject it as a dependency before we can use it.
          var SongPlayer = {};
          
-         
+
          
          //private attributes:
          /**
@@ -21,8 +21,9 @@
          */
          var currentBuzzObject = null;
 
+
          
-         
+ 
          
          //private functions
         /**
@@ -43,8 +44,17 @@
                  formats: ['mp3'],
                  preload: true
              });
+             
+             
+         console.log("STARTING volume: "+currentBuzzObject.getVolume());
+        
+             
+             
              currentBuzzObject.bind('timeupdate', function() {
-                 $rootScope.$apply(function() { SongPlayer.currentTime = currentBuzzObject.getTime(); });
+                 $rootScope.$apply(function() { //will continually update
+                     SongPlayer.currentTime = currentBuzzObject.getTime();
+                     SongPlayer.volume = currentBuzzObject.getVolume();
+                 });
              });
              SongPlayer.currentSong = song;
          };
@@ -94,7 +104,15 @@
          * @type {Number}
          */
          SongPlayer.currentTime = null;
- 
+         /**SongPlayer.volume
+         * @desc number between 0 and 100 to hold volume level. default sound value is 80. not sure what I'm supposed to do with this variable!
+         * @type number
+         */         
+         //SongPlayer.volume; 
+         
+         
+         
+         
          
          
          
@@ -170,11 +188,15 @@
              * @desc Set current time (in seconds) of currently playing song
              * @param {Number} time
              */
-             SongPlayer.setCurrentTime = function(time) {
+         SongPlayer.setCurrentTime = function(time) {
                  if (currentBuzzObject) {
                      currentBuzzObject.setTime(time);
                  }
              };
+         /* change the volume. The Buzz library has a setVolume method. The range is 0-100.*/
+          SongPlayer.setVolume = function(number){
+             currentBuzzObject.setVolume(number);
+         };
          
          
          

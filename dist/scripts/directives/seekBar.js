@@ -102,9 +102,9 @@
                  a function to call in the onClickSeekBar and trackThumb methods that will send the 
                  updated scope.value to the function evaluated by onChange: */
                  scope.onClickSeekBar = function(event) {
-                     var percent = calculatePercent(seekBar, event);
+                     var percent = calculatePercent(seekBar, event); //custom function
                      scope.value = percent * scope.max;
-                     notifyOnChange(scope.value);
+                     notifyOnChange(scope.value); //custom function
                  };
                  
                  
@@ -120,10 +120,10 @@
                  send the updated scope.value to the function evaluated by onChange: */
                  scope.trackThumb = function() {
                      $document.bind('mousemove.thumb', function(event) {
-                         var percent = calculatePercent(seekBar, event);
+                         var percent = calculatePercent(seekBar, event); //custom function
                          scope.$apply(function() {
                              scope.value = percent * scope.max;
-                             notifyOnChange(scope.value);
+                             notifyOnChange(scope.value); //custom function
                          });
                      });
                      $document.bind('mouseup.thumb', function() {
@@ -149,9 +149,9 @@
                  argument we pass into the SongPlayer.setCurrentTime() function 
                  called in the view.
                  */
-                 var notifyOnChange = function(newValue) {
+                 var notifyOnChange = function(something) {
                       if (typeof scope.onChange === 'function') {
-                          scope.onChange({value: newValue});
+                          scope.onChange({value: something});//onChange is an attribute that takes an expression to execute
                       }
                   };
                  
