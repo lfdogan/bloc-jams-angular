@@ -1,5 +1,5 @@
  (function() {
-     function SongPlayer(Fixtures) {//Inject the Fixtures service into the SongPlayer service
+     function SongPlayer($rootScope, Fixtures) {//Inject the Fixtures service into the SongPlayer service. Because $rootScope is a service, we must inject it as a dependency before we can use it.
          var SongPlayer = {};
          
          
@@ -27,19 +27,26 @@
          //private functions
         /**
          * @function setSong
-         * @desc if currently playing a song, stop song. change html attribute playing to null. set a Buzz sound object from albumPicasso.songs[song].audioUrl. assign the songs array element that was clicked on to the currentSong variable
+         * @desc 
+         1. if currently playing a song, stop song and change html attribute playing to null. 
+         2. set a Buzz sound object from albumPicasso.songs[song].audioUrl.
+         3. To update the song's playback progress from anywhere, we'll add a $rootScope.$apply event in the SongPlayer service. This creates a custom event that other parts of the Angular application can "listen" to. This will be our first custom event. Adding the $apply to the SongPlayer.setSong method starts "applying" the time update once we know which song to play. Use buzz library's getTime() method to determine current position of song. Set the to SongPlayer.currentTime. We used the Buzz library bind() method in the Foundation as well. timeupdate is one of a number of HTML5 audio events we can use with Buzz's bind() method. The bind() method adds an event listener to the Buzz sound object – in this case, we listen for a timeupdate event. When the song playback time updates, we execute a callback function. This function sets the value of SongPlayer.currentTime to the current playback time of the current Buzz object using another one of the Buzz library methods: getTime(), which gets the current playback position in seconds. Using $apply, we apply the time update change to the $rootScope.
+         4. assign the songs array element that was clicked on to the currentSong variable
          * @param {Object} song
          */
          var setSong = function(song){
-             if (currentBuzzObject) { 
-                     currentBuzzObject.stop();
-                     SongPlayer.currentSong.playing = null;
-                 }
-                 currentBuzzObject = new buzz.sound(song.audioUrl, {
-                     formats: ['mp3'],
-                     preload: true
-                 });
-                 SongPlayer.currentSong = song;
+             if (currentBuzzObject) {
+                 currentBuzzObject.stop();
+                 SongPlayer.currentSong.playing = null;
+             }
+             currentBuzzObject = new buzz.sound(song.audioUrl, {
+                 formats: ['mp3'],
+                 preload: true
+             });
+             currentBuzzObject.bind('timeupdate', function() {
+                 $rootScope.$apply(function() { SongPlayer.currentTime = currentBuzzObject.getTime(); });
+             });
+             SongPlayer.currentSong = song;
          };
          //assignment7: Write a private playSong function. This function should do two things: Play the current Buzz object: currentBuzzObject.play(); Set the playing property of the song object to true: song.playing = true; Replace all instances when these two lines of code are used together with the playSong function. Write documentation for the remaining undocumented attributes and functions of the SongPlayer service.
           /**
@@ -81,7 +88,12 @@
          * @desc song object element from album's songs array or 'null'
          * @type {Object}
          */         
-         SongPlayer.currentSong = null;     
+         SongPlayer.currentSong = null;
+          /**SongPlayer.currentTime
+         * @desc Current playback time (in seconds) of currently playing song
+         * @type {Number}
+         */
+         SongPlayer.currentTime = null;
  
          
          
@@ -148,12 +160,30 @@
          };
          
          
+         
+          /** The setCurrentTime method checks if there is a current Buzz object, and, if so, 
+          uses the Buzz library's setTime method to set the playback position in seconds.
+          <seek-bar value="{{ playerBar.songPlayer.currentTime }}" 
+                    max="{{ playerBar.songPlayer.currentSong.length }}" 
+                    on-change="playerBar.songPlayer.setCurrentTime(value)"></seek-bar>
+             * @function setCurrentTime
+             * @desc Set current time (in seconds) of currently playing song
+             * @param {Number} time
+             */
+             SongPlayer.setCurrentTime = function(time) {
+                 if (currentBuzzObject) {
+                     currentBuzzObject.setTime(time);
+                 }
+             };
+         
+         
+         
           return SongPlayer;
      }
  
      angular
          .module('blocJams')
-         .factory('SongPlayer', SongPlayer);
+         .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
  })();
 
 
