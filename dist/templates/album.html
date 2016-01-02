@@ -24,7 +24,7 @@
                      ng-click="album.songPlayer.pause(song)"><span class="ion-pause"></span></a>
              </td>
              <td class="song-item-title"> {{song.name}} </td>
-             <td class="song-item-duration"> {{song.length}} </td>
+             <td class="song-item-duration"> {{song.length | timecode}} </td>
          </tr>
      </table>
  </main>
