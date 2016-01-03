@@ -44,16 +44,18 @@
                  formats: ['mp3'],
                  preload: true
              });
-             
-             
-         console.log("STARTING volume: "+currentBuzzObject.getVolume());
+
         
              
-             
+             //using $apply will continually update the seek bar and current time.
+             /*1. check to see if the song has reached the end. If not then getTime and getVolume. 
+                    If song has reached the end play the next song. */
              currentBuzzObject.bind('timeupdate', function() {
-                 $rootScope.$apply(function() { //will continually update
-                     SongPlayer.currentTime = currentBuzzObject.getTime();
-                     SongPlayer.volume = currentBuzzObject.getVolume();
+                 $rootScope.$apply(function() { 
+                     if (currentBuzzObject.getTime() != currentBuzzObject.getDuration()) {
+                        SongPlayer.currentTime = currentBuzzObject.getTime();
+                        SongPlayer.volume = currentBuzzObject.getVolume();
+                     } else SongPlayer.next();
                  });
              });
              SongPlayer.currentSong = song;
