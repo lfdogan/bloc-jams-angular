@@ -45,11 +45,7 @@
                  preload: true
              });
              
-             
-         console.log("STARTING volume: "+currentBuzzObject.getVolume());
-        
-             
-             
+                      
              currentBuzzObject.bind('timeupdate', function() {
                  $rootScope.$apply(function() { //will continually update
                      SongPlayer.currentTime = currentBuzzObject.getTime();
