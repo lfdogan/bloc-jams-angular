@@ -106,8 +106,8 @@ Kindle Fire HD 8.9 min-device-width: 1200px
 
 /* ROOT EM = 16PX in most browsers */
 
- /* Medium and small screens (640px) smaller tablets and bigger phones */
- @media (min-width: 40rem) { /* Everything that is at least 40 root ems wide */
+ /* and small screens (30rem = 480px) */
+ @media (min-width: 30rem) { /* Everything that is at least 40 root ems wide */
      html { font-size: 112%; }
      .column {
          float: left; /* sticks to left-side of container */
@@ -116,12 +116,18 @@ Kindle Fire HD 8.9 min-device-width: 1200px
          }
      .column.full {width: 100%;}
      .column.two-thirds {width: 66.7%;}
-     .column.half {width: 50%;}
-     .column.third {width: 33.3%;}
-     .column.fourth {width: 25%;}
+     .column.half, .column.third, .column.fourth {width: 50%;}
      .column.flow-opposite {float: right;}
 }
- 
+ /* and small screens (35rem = 560px) */
+ @media (min-width: 35rem) { /* Everything that is at least 40 root ems wide */
+     .column.third, .column.fourth {width: 33.3%;}
+}
+  /* Medium and small screens (40rem = 640px) smaller tablets and bigger phones */
+ @media (min-width: 40rem) { /* Everything that is at least 40 root ems wide */
+     .column.fourth {width: 25%;}
+}
+
  /* Large screens (1024px) laptops and tablets */
  @media (min-width: 64rem) {
      html { font-size: 120%;}
