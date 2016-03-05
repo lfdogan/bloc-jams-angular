@@ -44,16 +44,14 @@
                  formats: ['mp3'],
                  preload: true
              });
-             
-             
-         console.log("STARTING volume: "+currentBuzzObject.getVolume());
-        
-             
-             
+             //using $apply will continually update the seek bar and current time.
+             /* check to see if the song has reached the end. If not then getTime and getVolume. 
+                    If song has reached the end play the next song. */
              currentBuzzObject.bind('timeupdate', function() {
-                 $rootScope.$apply(function() { //will continually update
-                     SongPlayer.currentTime = currentBuzzObject.getTime();
-                     SongPlayer.volume = currentBuzzObject.getVolume();
+                 $rootScope.$apply(function() { 
+                     if (currentBuzzObject.getTime() != currentBuzzObject.getDuration()) {
+                        SongPlayer.currentTime = currentBuzzObject.getTime();
+                     } else SongPlayer.next();
                  });
              });
              SongPlayer.currentSong = song;
@@ -105,16 +103,16 @@
          */
          SongPlayer.currentTime = null;
          /**SongPlayer.volume
-         * @desc number between 0 and 100 to hold volume level. default sound value is 80. not sure what I'm supposed to do with this variable!
+         * @desc number between 0 and 100 to hold volume level. default sound value is 80. html will use this value to either show the volume icon or the mute volume icon.
          * @type number
          */         
-         //SongPlayer.volume; 
+         SongPlayer.volume = 80;
+
          
          
          
          
-         
-         
+  
          
          
          
@@ -150,6 +148,7 @@
          * @param none
          */         
           SongPlayer.previous = function() {
+              SongPlayer.unmuteVolume();//when user clicks previous button the volume will return if muted.
               var currentSongIndex = getSongIndex(SongPlayer.currentSong);
               currentSongIndex--;
               if (currentSongIndex < 0) {
@@ -166,6 +165,7 @@
          * @param none
          */         
           SongPlayer.next = function() {
+              SongPlayer.unmuteVolume();//when user clicks next button the volume will return if muted.
               var currentSongIndex = getSongIndex(SongPlayer.currentSong);
               currentSongIndex++;
               if (currentSongIndex >= currentAlbum.songs.length) {
@@ -193,10 +193,24 @@
                      currentBuzzObject.setTime(time);
                  }
              };
-         /* change the volume. The Buzz library has a setVolume method. The range is 0-100.*/
+         /* change the volume. The Buzz library has a setVolume method. The range is 0-100. If sound is muted when user drags/clicks the volume bar it will unmute the volume and set it to level based on mouse button release location */
           SongPlayer.setVolume = function(number){
-             currentBuzzObject.setVolume(number);
+              if ( currentBuzzObject.isMuted() ) {
+                  SongPlayer.unmuteVolume();
+              }
+              currentBuzzObject.setVolume(number);
          };
+         
+         /* mute the volume when user clicks on the volume icon */
+         SongPlayer.muteVolume = function() {
+             currentBuzzObject.mute();//buzz library function
+             SongPlayer.volume = 0; // buzz will still see volume as previous number while on mute
+         };
+         SongPlayer.unmuteVolume = function() {
+             SongPlayer.volume = currentBuzzObject.getVolume();             
+             currentBuzzObject.unmute();//buzz library function
+             SongPlayer.volume = currentBuzzObject.getVolume();//buzz library gets current volume          
+         };            
          
          
          

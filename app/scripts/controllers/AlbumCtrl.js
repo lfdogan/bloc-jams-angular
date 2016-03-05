@@ -1,6 +1,13 @@
  (function() {
      function AlbumCtrl(Fixtures, SongPlayer) { //services injected
-         this.albumData = Fixtures.getAlbum(); //new code for lesson 6: Update AlbumCtrl to use the Fixtures service's getAlbum() method
+         
+         //new code for lesson 6: Update AlbumCtrl to use the Fixtures service's getAlbum() method
+         this.albumData = Fixtures.getAlbum();
+         
+                  
+
+         
+         
          this.songPlayer = SongPlayer;
      }
  
