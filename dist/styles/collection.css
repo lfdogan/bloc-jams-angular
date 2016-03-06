@@ -17,28 +17,28 @@
  .collection-album-container {
      position: relative;
      margin-top: 30px;
-     margin-bottom: 20px;
+     margin-bottom: 10px;
      text-align: center;
  }
- 
+
  .collection-album-container .caption {
-     margin-top: 10px;
+     margin-top: 10px; /* space between album image and text */
  }
  
- .collection-album-container .caption p {
+ .collection-album-container .caption p { /*album text*/
      font-size: 1rem;
      font-weight: 300;
-     color: rgba(255, 255, 255, 0.6);
+     color: darkgray;
  }
- 
- .collection-album-container .caption p a {
-     color: rgba(255, 255, 255, 0.6);
- }
- 
- .collection-album-container .caption p a.album-name {
-     color: white;
- }
- 
+.collection-album-container .caption p:hover {
+    color: white; /* change text color from gray to white on hover */
+}
  .collection-album-container img {
-     width: 80%;
+     width: 80%; /* size of album image within container */
  }
+.album-in-collection {
+    text-decoration: none; /* no link underline */
+}
+.album-in-collection:hover {
+    background-color: white; /* add a white bar under image on hover */
+}

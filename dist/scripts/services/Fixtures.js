@@ -9,6 +9,8 @@
             artist: 'Pablo Picasso',
             label: 'Cubism',
             year: '1881',
+            genre: 'Classical',
+            styles: 'Chamber Music',
             albumArtUrl: '/assets/images/album_covers/01.png',
             songs: [
                 {name: 'Blue', length: 161.71, audioUrl: '/assets/music/bloc_jams_music/blue' },//161.71 seconds
@@ -23,6 +25,8 @@
             name: 'The Telephone',
             artist: 'Guglielmo Marconi',
             label: 'EM',
+            genre: 'Classical',
+            styles: 'Chamber Music',
             year: '1909',
             albumArtUrl: '/assets/images/album_covers/20.png',
             songs: [
@@ -40,6 +44,8 @@
             artist: 'R. Kelly',
             label: 'RCA',
             year: '2015',
+            genre: 'R&B',
+            styles: 'Contemporary R&B, Adult Contemporary R&B',
             albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/984/MI0003984115.jpg?partner=allrovi.com',
             songs: [
                 {name: 'The Poem', length: '1:19'},
@@ -63,6 +69,8 @@
             artist: 'Alan Hampton',
             label: 'RCA',
             year: '2011',
+            genre: 'Pop/Rock',
+            styles: 'Alternative Singer/Songwriter, Alternative/Indie Rock',
             albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/125/MI0003125428.jpg?partner=allrovi.com',
             songs: [
                 {name: 'Staring at the Sun', length: '4:09'},
@@ -84,6 +92,8 @@
             artist: 'Panic! At the Disco',
             label: 'RCA',
             year: '2000',
+            genre: 'Pop/Rock',
+            styles: 'Alternative/Indie Rock, Emo-Pop, Punk-Pop',
             albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/955/MI0003955172.jpg?partner=allrovi.com',
             songs: [
                 {name: 'Victorious', length: '4:09'},
@@ -106,6 +116,8 @@
             artist: 'Cam / Camaron Ochs',
             label: 'RCA',
             year: '2015',
+            genre: 'Country',
+            styles: 'Contemporary Country, Country-Pop',
             albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0003/979/MI0003979990.jpg?partner=allrovi.com',
             songs: [
                 {name: 'Untamed', length: '3:30'},
@@ -121,6 +133,31 @@
                 {name: 'Village', length: '3:55'}
             ]
         };
+         
+         // album http://www.allmusic.com/album/no-pads-no-helmetsjust-balls-mw0000658489
+         var mw0000658489 = {
+             name: 'No Pads, No Helmets...Just Balls',
+             artist: 'Simple Plan',
+             label: 'Atlantic',
+             year: '2002',
+             genre: 'Pop/Rock',
+             styles: 'Alternative/Indie Rock, Punk-Pop',
+             albumArtUrl: 'http://cps-static.rovicorp.com/3/JPG_400/MI0001/890/MI0001890206.jpg?partner=allrovi.com',
+             songs: [
+                 {name: "I'd Do Anything", length: '3:17'},
+                 {name: "The Worst Day Ever", length: '3:27'},
+                 {name: "You Don't Mean Anything", length: '2:28'},
+                 {name: "I'm Just a Kid", length: '3:18'},
+                 {name: "When I'm With You", length: '2:37'},
+                 {name: "Meet You There", length: '4:14'},
+                 {name: "Addicted", length: '3:52'},
+                 {name: "My Alien", length: '3:08'},
+                 {name: "God Must Hate Me", length: '2:44'},
+                 {name: "I Won't Be There", length: '3:09'},
+                 {name: "One Day", length: '3:15'},
+                 {name: "Perfect", length: '4:37'}
+             ]
+         };
 
 
 
@@ -143,7 +180,7 @@
 //angular.copy is one of several global function components on the angular object. We add an albums property and set its value to an empty array. Within the for loop, we use angular.copy to make copies of albumPicasso and push them to the array.
    
          Fixtures.getCollection = function() {
-             var albums = [albumPicasso, albumMarconi, mw0002896346, mw0002083060, mw0002891900, mw0002896652];
+             var albums = [albumPicasso, albumMarconi, mw0002896346, mw0002083060, mw0002891900, mw0002896652, mw0000658489];
              return albums;
          }
                 
